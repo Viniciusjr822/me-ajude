@@ -1,152 +1,25 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>Fichas da Festa</title>
-  <style>
-    body {
-      margin: 0; padding: 0;
-      background: url('Me ajude a ganhar.png') no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-    }
+<h1 class="titulo-escola">Colégio Alvorecer</h1>
 
-    .titulo-escola {
-      text-align: center;
-      font-size: 40px;
-      color: #ffffff;
-      text-shadow: 3px 3px 8px #000000;
-      margin-top: 20px;
-      font-weight: bold;
-    }
+<iframe 
+  id="player"
+  width="100%" 
+  height="166" 
+  scrolling="no" 
+  frameborder="no" 
+  allow="autoplay"
+  src="https://w.soundcloud.com/player/?url=https://soundcloud.com/user-250194955/banda-patrulha-crina-negra&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+</iframe>
 
-    .calculadora {
-      position: absolute;
-      top: 50%; right: 60px;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.95);
-      padding: 35px;
-      border-radius: 20px;
-      width: 360px;
-      text-align: center;
-      box-shadow: 0 0 25px rgba(0,0,0,0.4);
-      color: #333;
-    }
-    .calculadora h2 {
-      font-size: 28px; margin-bottom: 15px;
-      color: #d84315;
-    }
-    input {
-      padding: 12px; font-size: 18px;
-      border: 2px solid #d84315;
-      border-radius: 8px;
-      width: 92%; margin-bottom: 15px;
-      outline: none;
-    }
-    button {
-      padding: 12px 25px; font-size: 18px;
-      background-color: #ff5722; color: white;
-      border: none; border-radius: 8px;
-      cursor: pointer; transition: background 0.3s;
-      margin-top: 10px;
-    }
-    button:hover {
-      background-color: #d84315;
-    }
-    #resultado {
-      margin-top: 15px; font-size: 20px; color: #444;
-    }
+<button onclick="tocarMusica()">▶️ Tocar música</button>
 
-    .popup {
-      display: none;
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      z-index: 1000;
-      width: 320px;
-      text-align: left;
+<script>
+  function tocarMusica() {
+    // Atualiza o src do iframe para ativar autoplay
+    const player = document.getElementById('player');
+    let src = player.src;
+    if(!src.includes('auto_play=true')) {
+      src = src.replace('auto_play=false', 'auto_play=true');
+      player.src = src;
     }
-    .popup h3 {
-      margin-top: 0;
-    }
-    .fechar {
-      position: absolute;
-      top: 10px; right: 15px;
-      font-size: 20px;
-      cursor: pointer;
-      color: red;
-    }
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.4);
-      z-index: 999;
-    }
-
-    /* Removi o display:none do audio para evitar confusão */
-  </style>
-</head>
-<body>
-  <h1 class="titulo-escola">Colégio Alvorecer</h1>
-
-  <!-- Player do SoundCloud embutido -->
-  <iframe 
-    width="100%" 
-    height="166" 
-    scrolling="no" 
-    frameborder="no" 
-    allow="autoplay"
-    src="https://w.soundcloud.com/player/?url=https://soundcloud.com/user-250194955/banda-patrulha-crina-negra&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
-  </iframe>
-
-  <div class="calculadora">
-    <h2>🎉 Fichas da Festa</h2>
-    <p>1 ficha = R$6</p>
-    <input type="number" id="valor" placeholder="Digite o valor em R$">
-    <br>
-    <button onclick="converter()">Converter</button>
-    <div id="resultado"></div>
-    <button onclick="abrirPopup()">Comprar</button>
-  </div>
-
-  <div class="overlay" id="fundoEscuro"></div>
-  <div class="popup" id="popup">
-    <span class="fechar" onclick="fecharPopup()">✖</span>
-    <h3>📱 Informações para compra:</h3>
-    <p><strong>Número:</strong> 55 84 8122-4299</p>
-    <p><strong>Discord:</strong> vinicius_88569</p>
-    <p><strong>Email:</strong> viniciusferreirac7@gmail.com</p>
-  </div>
-
-  <script>
-    function converter() {
-      const reais = parseFloat(document.getElementById("valor").value);
-      const preco = 6;
-      const out = document.getElementById("resultado");
-      if (isNaN(reais) || reais < 0) {
-        out.innerText = "Digite um valor válido!";
-        return;
-      }
-      const fichas = Math.floor(reais / preco);
-      const troco = (reais % preco).toFixed(2);
-      out.innerHTML = `🎟️ <strong>${fichas}</strong> ficha(s)<br>🪙 Troco: R$${troco}`;
-    }
-
-    function abrirPopup() {
-      document.getElementById("popup").style.display = "block";
-      document.getElementById("fundoEscuro").style.display = "block";
-    }
-
-    function fecharPopup() {
-      document.getElementById("popup").style.display = "none";
-      document.getElementById("fundoEscuro").style.display = "none";
-    }
-  </script>
-</body>
-</html>
+  }
+</script>
