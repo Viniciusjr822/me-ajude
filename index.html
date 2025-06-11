@@ -9,21 +9,35 @@
       background: url('Me ajude a ganhar.png') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100vh;
+      padding: 0 60px;
+      box-sizing: border-box;
     }
 
     .titulo-escola {
-      text-align: center;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 40px;
       color: #ffffff;
       text-shadow: 3px 3px 8px #000000;
-      margin-top: 20px;
       font-weight: bold;
+      z-index: 10;
+    }
+
+    #player {
+      width: 360px;
+      height: 450px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+      flex-shrink: 0;
     }
 
     .calculadora {
-      position: absolute;
-      top: 50%; right: 60px;
-      transform: translateY(-50%);
       background: rgba(255,255,255,0.95);
       padding: 35px;
       border-radius: 20px;
@@ -88,25 +102,6 @@
       background: rgba(0,0,0,0.4);
       z-index: 999;
     }
-
-    #botao-tocar-musica {
-      display: block;
-      margin: 20px auto;
-      background-color: #ff5500;
-      border-radius: 8px;
-      padding: 12px 30px;
-      color: white;
-      font-weight: bold;
-      font-size: 18px;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      max-width: 200px;
-      text-align: center;
-    }
-    #botao-tocar-musica:hover {
-      background-color: #d84315;
-    }
   </style>
 </head>
 <body>
@@ -114,15 +109,11 @@
 
   <iframe 
     id="player"
-    width="100%" 
-    height="166" 
     scrolling="no" 
     frameborder="no" 
     allow="autoplay"
     src="https://w.soundcloud.com/player/?url=https://soundcloud.com/bandaplinta/pula-fogueira&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
   </iframe>
-
-  <button id="botao-tocar-musica" onclick="tocarMusica()">▶️ Tocar música</button>
 
   <div class="calculadora">
     <h2>🎉 Fichas da Festa</h2>
@@ -165,15 +156,6 @@
     function fecharPopup() {
       document.getElementById("popup").style.display = "none";
       document.getElementById("fundoEscuro").style.display = "none";
-    }
-
-    function tocarMusica() {
-      const player = document.getElementById("player");
-      let src = player.src;
-      if (!src.includes("auto_play=true")) {
-        src = src.replace("auto_play=false", "auto_play=true");
-        player.src = src;
-      }
     }
   </script>
 </body>
